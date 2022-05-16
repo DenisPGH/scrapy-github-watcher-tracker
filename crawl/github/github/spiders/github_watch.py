@@ -1,30 +1,33 @@
 
 import json
 import os
-import random
 from datetime import datetime
+
+
 os.environ.setdefault('github.settings','SCRAPY_SETTINGS_MODULE')
 import requests
 import scrapy
-from scrapy.crawler import CrawlerProcess
-from scrapy.selector import Selector
 import re
-
-from scrapy.utils.project import get_project_settings
+import psycopg2
 
 pattern=r'(?P<deni>(class="Truncate")) title="(?P<name>([A-Z- a-z]+))"'
 
-# import psycopg2
-#
-# conn = psycopg2.connect(
-#     host="localhost",
-#     database="roboweb_db",
-#     user="denis_postgre",
-#     password="D_12-K9")
+class ConnectionDB():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="roboweb_db",
+        user="denis_postgre",
+        password="D_12-K9")
+    @staticmethod
+    def close_connection():
+        return ConnectionDB.conn.close()
 
 
 
-class GithubSpider(scrapy.Spider):
+
+
+
+class GithubSpider(scrapy.Spider, ConnectionDB):
     custom_settings = {
         'github.settings':'SCRAPY_SETTINGS_MODULE',
     }
@@ -87,21 +90,26 @@ class GithubSpider(scrapy.Spider):
         with open('file.txt','a') as file:
             file.write(json.dumps(dict_)+"\n")
 
-        # cursor = conn.cursor() # 2022-05-16 16:09:43.531859
-        # info_date=str(datetime.now()).split(" ")
-        # date_=info_date[0]
-        # time_=info_date[1].split(".")[0]
-        #
-        #
-        # cursor.execute("INSERT INTO github(date,time,names ) VALUES (current_date ,current_time,'Deni')")
-        # conn.commit()
-        #
-        # print('done')
-        #
-        # conn.close()
-        # cursor.close()
+        cursor = self.conn.cursor() # 2022-05-16 16:09:43.531859
+        info_date=str(datetime.now()).split(" ")
+        date_=info_date[0]
+        time_=info_date[1].split(".")[0]
+
+        names_=', '.join(dict_['names'])
+        dict_query={'a':date_,
+                    'b':time_,
+                    'c':names_}
+
+        cursor.execute('INSERT INTO github(date,time,names ) VALUES(%(a)s, %(b)s, %(c)s)', dict_query)
+        self.conn.commit()
+
+        print('done')
 
 
+
+
+# conn.close()
+# #cursor.close()
 
 
 

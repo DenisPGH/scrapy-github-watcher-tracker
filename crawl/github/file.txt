@@ -1,9 +1,0 @@
-{"time": "2022-05-16 16:09:43.531859", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:14:17.248464", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:14:53.531943", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:16:54.134011", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:19:27.432712", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:20:22.478566", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:21:21.160664", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:39:47.970622", "names": ["Denislav Petrov"]}
-{"time": "2022-05-16 16:52:07.233950", "names": ["Denislav Petrov"]}
