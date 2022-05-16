@@ -29,3 +29,9 @@
     #         database="roboweb_db",
     #         user="denis_postgre",
     #         password="D_12-K9")
+
+
+# process = CrawlerProcess({'USER_AGENT' :'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36'
+#                           })
+# process.crawl(GithubSpider) # here have to change the name to NoticeSpider
+# process.start()

@@ -20,11 +20,11 @@ def run_crawl():
 
 counter=0
 while True:
-    if counter>10:
+    if counter>100:
         break
     run_crawl()
    # time.sleep(3)
-    print(f"counter={counter}")
+    #print(f"counter={counter}")
     counter+=1
 
 

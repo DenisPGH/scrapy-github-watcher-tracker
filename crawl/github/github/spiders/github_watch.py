@@ -2,8 +2,6 @@
 import json
 import os
 from datetime import datetime
-
-
 os.environ.setdefault('github.settings','SCRAPY_SETTINGS_MODULE')
 import requests
 import scrapy
@@ -86,7 +84,7 @@ class GithubSpider(scrapy.Spider, ConnectionDB):
         all_wached=re.finditer(pattern,current_text)
         for each in all_wached:
             dict_['names'].append(each.group('name').strip())
-        print('done')
+        #print('done')
         with open('file.txt','a') as file:
             file.write(json.dumps(dict_)+"\n")
 
@@ -103,13 +101,7 @@ class GithubSpider(scrapy.Spider, ConnectionDB):
         cursor.execute('INSERT INTO github(date,time,names ) VALUES(%(a)s, %(b)s, %(c)s)', dict_query)
         self.conn.commit()
 
-        print('done')
-
-
-
-
-# conn.close()
-# #cursor.close()
+        #print('done')
 
 
 
@@ -120,7 +112,7 @@ class GithubSpider(scrapy.Spider, ConnectionDB):
 
 
 
-# process = CrawlerProcess({'USER_AGENT' :'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36'
-#                           })
-# process.crawl(GithubSpider) # here have to change the name to NoticeSpider
-# process.start()
+
+
+
+
