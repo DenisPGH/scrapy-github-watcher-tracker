@@ -28,6 +28,16 @@ while True:
     counter+=1
 
 
-ConnectionDB.close_connection()
+"""
+TODO:
+1.add voice to speak, when new one is watching + in the end, who were wachting today
+2. add voice INDICATION by error
+3. add statistic file to store watcher for current day after finish the crawling ===> 
+{'2022-05-19':{"Denislav Petrov":['first time of watching'],"Other Person":['first time of watching']},
+'2022-05-20':{"Denislav Petrov":['first time of watching'],"Other Person":['first time of watching']},
+}
+4. Only one row in statistic file for current day-> check it!!!
 
+"""
+ConnectionDB.close_connection()
 print(f'{counter}')
