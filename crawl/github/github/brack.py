@@ -62,3 +62,11 @@
 #     report.write(json.dumps(unique_visitors))
 # print(unique_visitors)
 #
+
+# import pyttsx3
+#
+# speaker = pyttsx3.init()
+# speaker.setProperty("rate", 140)
+# speaker.setProperty("voice", 'Bulgarian+m2')
+# speaker.say('START!!')
+# speaker.runAndWait()

@@ -2,13 +2,16 @@ import json
 import os
 import sys
 from datetime import datetime
-
+import pyttsx3
 from scrapy.crawler import CrawlerProcess
-
-
 from github.github.spiders.github_watch import GithubSpider, ConnectionDB
 
 os.environ.setdefault('github.settings','SCRAPY_SETTINGS_MODULE', )
+speaker = pyttsx3.init()
+speaker.setProperty("rate", 140)
+speaker.setProperty("voice", 'Bulgarian+m2')
+# speaker.say('START!!')
+speaker.runAndWait()
 
 
 
@@ -24,14 +27,17 @@ def run_crawl():
 counter=0
 try:
     while True:
-        if counter>1:
+        if counter>0:
             break
         run_crawl()
         # time.sleep(3)
         #print(f"counter={counter}")
         counter+=1
 except:
-    pass
+
+    text_1 = "It's an error!"*3
+    speaker.say(text_1)
+    speaker.runAndWait()
 
 finally:
     ConnectionDB.close_connection()
@@ -57,13 +63,18 @@ finally:
         report.write(json.dumps(unique_visitors)+'\n')
     print(unique_visitors)
 
+    text_2 = f"End! You have {len(unique_visitors[day])} unique visitors today." \
+             f" Their names are : {', '.join(unique_visitors[day])}"
+    speaker.say(text_2)
+    speaker.runAndWait()
+
 
 
 
 """
 TODO:
-1.add voice to speak, when new one is watching + in the end, who were wachting today
-2. add voice INDICATION by error
++1.add voice to speak, when new one is watching + in the end, who were wachting today
++2. add voice INDICATION by error
 +3. add statistic file to store watcher for current day after finish the crawling ===> 
 {'2022-05-19':{"Denislav Petrov":['first time of watching'],"Other Person":['first time of watching']},
 '2022-05-20':{"Denislav Petrov":['first time of watching'],"Other Person":['first time of watching']},
