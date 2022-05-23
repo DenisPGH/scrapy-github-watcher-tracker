@@ -8,8 +8,8 @@ from github.github.spiders.github_watch import GithubSpider, ConnectionDB
 
 os.environ.setdefault('github.settings','SCRAPY_SETTINGS_MODULE', )
 speaker = pyttsx3.init()
-speaker.setProperty("rate", 140)
-speaker.setProperty("voice", 'Bulgarian+m2')
+speaker.setProperty("rate", 150)
+speaker.setProperty("voice", 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0')
 # speaker.say('START!!')
 speaker.runAndWait()
 
@@ -35,9 +35,14 @@ try:
         counter+=1
 except:
 
-    text_1 = "It's an error!"*3
+    text_1 = "It's an error!!!"*3
     speaker.say(text_1)
     speaker.runAndWait()
+    while True:
+        if counter>0:
+            break
+        run_crawl()
+        counter+=1
 
 finally:
     ConnectionDB.close_connection()
@@ -59,9 +64,10 @@ finally:
                         and dict_record['time'].split(' ')[0] == day:
                     unique_visitors[day][visitors[each_visitor_index]] = dict_record['time']
 
+
     with open('report.txt', 'a') as report:
         report.write(json.dumps(unique_visitors)+'\n')
-    print(unique_visitors)
+    #print(unique_visitors)
 
     text_2 = f"End! You have {len(unique_visitors[day])} unique visitors today." \
              f" Their names are : {', '.join(unique_visitors[day])}"
